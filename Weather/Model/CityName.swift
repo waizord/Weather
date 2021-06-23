@@ -6,3 +6,6 @@
 //
 
 import Foundation
+struct CityName: Codable {
+    var name: String = ""
+}

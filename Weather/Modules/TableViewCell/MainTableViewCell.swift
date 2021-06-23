@@ -1,5 +1,5 @@
 //
-//  TableViewCell.swift
+//  MainTableViewCell.swift
 //  Weather
 //
 //  Created by Ivan on 6/22/21.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell {
+class MainTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
