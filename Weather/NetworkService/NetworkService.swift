@@ -18,9 +18,9 @@ class NetworkService {
             URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
                 if let data = data {
                     do {
-                        //let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: Any]
-
-                        //print(json)
+//                        let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: Any]
+//
+//                        print(json)
                         
                         let decoder = JSONDecoder()
                         jsonWeather = try decoder.decode(WeatherData.self, from: data)
@@ -53,6 +53,9 @@ class NetworkService {
             URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
                 if let data = data {
                     do {
+//                        let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: Any]
+//
+//                        print(json)
                         let decoder = JSONDecoder()
                         jsonCityName = try decoder.decode(CityName.self, from: data)
                         //print(jsonWeather)

@@ -30,7 +30,6 @@ class MainWeatherViewController: UIViewController {
     
     var tempLabel: UILabel = {
         var label = UILabel()
-        //label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 60)
         label.textAlignment = .center
         label.text = "Temp"
@@ -56,13 +55,13 @@ class MainWeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        weatherTableView.dataSource = self
+        weatherTableView.delegate = self
+        
         getLocationCoordinates()
         
         addAllViews()
         addAllConstraints()
-        
-        weatherTableView.dataSource = self
-        weatherTableView.delegate = self
         
     }
 }
@@ -71,7 +70,11 @@ class MainWeatherViewController: UIViewController {
 extension MainWeatherViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        if weatherData.current.dt == 0 {
+            return 0
+        }else{
+            return 12
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -88,12 +91,64 @@ extension MainWeatherViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = weatherTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainTableViewCell
-        cell.subtitleLabel.text = "ВОСХОД СОЛНЦА"
-        cell.mainLabel.text = "8:45 AM"
-        return cell
+        
+        switch indexPath.row {
+        case 0:
+            cell.subtitleLabel.text = "SUNRISE"
+            cell.mainLabel.text = "\(self.weatherData.current.sunrise)"
+            return cell
+        case 1:
+            cell.subtitleLabel.text = "SUNRISE"
+            cell.mainLabel.text = "\(self.weatherData.current.sunrise)"
+            return cell
+        case 2:
+            cell.subtitleLabel.text = "SUNRISE"
+            cell.mainLabel.text = "\(self.weatherData.current.sunrise)"
+            return cell
+        case 3:
+            cell.subtitleLabel.text = "SUNSET"
+            cell.mainLabel.text = "\(self.weatherData.current.sunset)"
+            return cell
+        case 4:
+            cell.subtitleLabel.text = "CHANCE OF RAIN"
+            cell.mainLabel.text = "\(Int(self.weatherData.daily[0].pop) * 100) %"
+            return cell
+        case 5:
+            cell.subtitleLabel.text = "HUMIDITY"
+            cell.mainLabel.text = "\(self.weatherData.current.humidity) %"
+            return cell
+        case 6:
+            cell.subtitleLabel.text = "WIND"
+            cell.mainLabel.text = "\(self.weatherData.current.wind_speed) m/s"
+            return cell
+        case 7:
+            cell.subtitleLabel.text = "FEELS LIKE"
+            cell.mainLabel.text = "\(self.weatherData.current.feels_like)°"
+            return cell
+        case 8:
+            cell.subtitleLabel.text = "PRECIPITATION"
+            if let rain = self.weatherData.daily[0].rain {
+                cell.mainLabel.text = "\(rain) cm"
+            } else{
+                cell.mainLabel.text = "\(0) cm"
+            }
+            return cell
+        case 9:
+            cell.subtitleLabel.text = "PRESSURE"
+            cell.mainLabel.text = "\(self.weatherData.current.pressure) hPa"
+            return cell
+        case 10:
+            cell.subtitleLabel.text = "VISIBILITY"
+            cell.mainLabel.text = "\(self.weatherData.current.dew_point) m"
+            return cell
+        case 11:
+            cell.subtitleLabel.text = "UV INDEX"
+            cell.mainLabel.text = "\(self.weatherData.current.uvi)"
+            return cell
+        default:
+            return cell
+        }
     }
-    
-    
     
 }
 //MARK: - Setting location and Network request
@@ -158,15 +213,24 @@ extension MainWeatherViewController {
             guard let self = self else {return}
             self.weatherData = weatherData
             
+            var date = Date(timeIntervalSince1970: weatherData.hourly[0].dt)
+            let dateFormater = DateFormatter()
+            dateFormater.timeZone = TimeZone(identifier: "ru")
+            
+            print(date)
+            
             DispatchQueue.main.async {
                 self.showDiscription(self.weatherData.daily[0].weather[0].description)
                 self.showCurrentTemp(self.weatherData.daily[0].temp.day)
+                self.weatherTableView.reloadData()
             }
         }
     }
     func getNetworkRequestOfCityName() {
         networkService.networkRequestforCityName(by: self.stringUrlCityName) { [weak self](curentData) in
             guard let self = self else {return}
+            
+            print(curentData)
             
             DispatchQueue.main.async {
                 self.showCityName(curentData.name)

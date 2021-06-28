@@ -19,20 +19,21 @@ struct Daily: Codable {
     var feels_like = Feels_like()
     var clouds: Int = 0
     var dew_point: Double = 0.0
-    var dt: Int = 0
+    var dt: Double = 0.0
     var humidity: Int = 0
     var moon_phase: Double = 0.0
-    var moonrise: Int = 0
-    var moonset: Int = 0
+    var moonrise: Double = 0.0
+    var moonset: Double = 0.0
     var pop: Double = 0.0
     var pressure: Int = 0
-    var sunrise: Int = 0
-    var sunset: Int = 0
+    var sunrise: Double = 0.0
+    var sunset: Double = 0.0
     var uvi: Double = 0.0
     var wind_deg: Double = 0.0
     var wind_gust: Double = 0.0
     var wind_speed: Double = 0.0
     var temp = Temp()
+    var rain: Double?
 }
 
 struct Temp: Codable {
@@ -49,7 +50,7 @@ struct Hourly: Codable {
     var feels_like: Double = 0.0
     var clouds: Int = 0
     var dew_point: Double = 0.0
-    var dt: Int = 0
+    var dt: Double = 0.0
     var humidity: Int = 0
     var pop: Double = 0.0
     var uvi: Double = 0.0
@@ -70,11 +71,11 @@ struct Current: Codable {
     var feels_like: Double = 0.0
     var clouds: Int = 0
     var dew_point: Double = 0.0
-    var dt: Int = 0
+    var dt: Double = 0.0
     var humidity: Int = 0
     var pressure: Int = 0
-    var sunrise: Int = 0
-    var sunset: Int = 0
+    var sunrise: Double = 0.0
+    var sunset: Double = 0.0
     var uvi: Double = 0.0
     var wind_deg: Double = 0.0
     var wind_speed: Double = 0.0
