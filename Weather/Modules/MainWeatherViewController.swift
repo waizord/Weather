@@ -9,54 +9,13 @@ import UIKit
 import CoreLocation
 
 class MainWeatherViewController: UIViewController {
-    
-//    var cityNameLabel: UILabel = {
-//        var label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.backgroundColor = .black
-//        label.text = "Minsk"
-//        return label
-//    }()
-//
-//    var cityDescriptionLabel: UILabel = {
-//        var label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.backgroundColor = .black
-//        return label
-//    }()
-//
-//    var cityTempLabel: UILabel = {
-//        var label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.backgroundColor = .blue
-//        return label
-//    }()
-//
-//    var scrolView: UIScrollView = {
-//        var view = UIScrollView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//
-//        return view
-//    }()
-//
-//    var collectionView: UICollectionView = {
-//        var view = UICollectionView()
-//        view.backgroundColor = .green
-//        return view
-//    }()
-//
-//    var weatherTable: UITableView = {
-//        var view = UITableView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .yellow
-//        return view
-//    }()
-    
-    @IBOutlet weak var cityNameLabel: UILabel!
-    @IBOutlet weak var discriptionLabel: UILabel!
-    @IBOutlet weak var tempLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
-    
+
+    var weatherTableView: UITableView = {
+        var table = UITableView()
+        table.register(UINib(nibName: "MainTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        table.translatesAutoresizingMaskIntoConstraints = false
+        return table
+    }()
     
     let locationManager = CLLocationManager()
     var weatherData = WeatherData()
@@ -64,18 +23,66 @@ class MainWeatherViewController: UIViewController {
     var stringUrlCityName = ""
     
     let networkService = NetworkService()
-
+    
+//MARK: - life cycle of ViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bringLocationCoordinates()
+        getLocationCoordinates()
         
+        addAllViews()
+        addAllConstraints()
+        
+        weatherTableView.dataSource = self
+        weatherTableView.delegate = self
         
     }
 }
+
+//MARK: - TableView delegate and dataSorce
+extension MainWeatherViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 15
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .green
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = weatherTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        //cell.textLabel?.text = "Cell"
+        return cell
+    }
+    
+    
+    
+}
 //MARK: - Setting location and Network request
+extension MainWeatherViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let lastLocation = locations.last {
+            print(lastLocation.coordinate.latitude, lastLocation.coordinate.longitude)
+            
+            self.createStringUrlBy(lastLocation.coordinate.latitude, and: lastLocation.coordinate.longitude)
+            self.createStringUrlForCityName(lastLocation.coordinate.latitude, and: lastLocation.coordinate.longitude)
+            self.getNetworkRequest()
+            self.getNetworkRequestOfCityName()
+        }
+    }
+}
+
 extension MainWeatherViewController {
-    func bringLocationCoordinates() {
+    func getLocationCoordinates() {
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
@@ -142,28 +149,38 @@ extension MainWeatherViewController {
 //MARK: - Setting UI information
 extension MainWeatherViewController {
     func showCityName(_ name: String) {
-        self.cityNameLabel.text = name
+        //self.cityNameLabel.text = name
         print(name)
     }
     func showDiscription(_ discription: String) {
-        self.discriptionLabel.text = discription
+        //self.discriptionLabel.text = discription
         print(discription)
     }
     func showCurrentTemp(_ temp: Double) {
-        self.tempLabel.text = "\(temp)" + "°"
+        //self.tempLabel.text = "\(temp)" + "°"
         print(temp)
     }
 }
 
-extension MainWeatherViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let lastLocation = locations.last {
-            print(lastLocation.coordinate.latitude, lastLocation.coordinate.longitude)
-            
-            self.createStringUrlBy(lastLocation.coordinate.latitude, and: lastLocation.coordinate.longitude)
-            self.createStringUrlForCityName(lastLocation.coordinate.latitude, and: lastLocation.coordinate.longitude)
-            self.getNetworkRequest()
-            self.getNetworkRequestOfCityName()
-        }
+//MARK: - Setting constraints and show Views
+extension MainWeatherViewController {
+    
+    func addAllViews() {
+        view.addSubview(weatherTableView)
+        addHeaderfoeTable()
     }
+    
+    func addHeaderfoeTable() {
+        let header = UIView(frame: CGRect(x: 0, y: 0, width: weatherTableView.frame.width, height: 100))
+        header.backgroundColor = .yellow
+        weatherTableView.tableHeaderView = header
+    }
+    
+    func addAllConstraints() {
+        weatherTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        weatherTableView.heightAnchor.constraint(equalToConstant: view.bounds.height * 0.85).isActive = true
+        weatherTableView.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
+
+    }
+    
 }

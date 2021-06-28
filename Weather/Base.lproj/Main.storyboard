@@ -15,56 +15,9 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cityName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UaF-YJ-VIR">
-                                <rect key="frame" x="0.0" y="40" width="414" height="29"/>
-                                <color key="backgroundColor" systemColor="linkColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="discription" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HdT-AH-yXK">
-                                <rect key="frame" x="0.0" y="69" width="414" height="20.333333333333329"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="temp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ldx-r5-GUX">
-                                <rect key="frame" x="0.0" y="89.333333333333329" width="414" height="50.999999999999986"/>
-                                <color key="backgroundColor" red="0.94509803920000002" green="0.62352941179999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7kx-wh-6x0">
-                                <rect key="frame" x="0.0" y="140.33333333333331" width="414" height="545.66666666666674"/>
-                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="Ldx-r5-GUX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5hm-oR-wL4"/>
-                            <constraint firstItem="Ldx-r5-GUX" firstAttribute="top" secondItem="HdT-AH-yXK" secondAttribute="bottom" id="7vY-Ku-aCR"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HdT-AH-yXK" secondAttribute="trailing" id="F1E-Cf-C0y"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7kx-wh-6x0" secondAttribute="trailing" id="VAQ-De-4M3"/>
-                            <constraint firstItem="UaF-YJ-VIR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="Wh8-eC-63V"/>
-                            <constraint firstItem="HdT-AH-yXK" firstAttribute="top" secondItem="UaF-YJ-VIR" secondAttribute="bottom" id="XuS-Sr-lny"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7kx-wh-6x0" secondAttribute="bottom" constant="50" id="YT2-7V-ThW"/>
-                            <constraint firstItem="7kx-wh-6x0" firstAttribute="top" secondItem="Ldx-r5-GUX" secondAttribute="bottom" id="c3g-33-gwf"/>
-                            <constraint firstItem="Ldx-r5-GUX" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="dfO-dk-nyW"/>
-                            <constraint firstItem="UaF-YJ-VIR" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ik4-YE-sm9"/>
-                            <constraint firstItem="HdT-AH-yXK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kg3-yf-hQz"/>
-                            <constraint firstItem="7kx-wh-6x0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="w1S-Qf-ZUJ"/>
-                            <constraint firstItem="UaF-YJ-VIR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wrX-lh-Xwf"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="cityNameLabel" destination="UaF-YJ-VIR" id="Sg6-aV-8vk"/>
-                        <outlet property="discriptionLabel" destination="HdT-AH-yXK" id="FBx-s9-ANC"/>
-                        <outlet property="tableView" destination="7kx-wh-6x0" id="Meo-jV-ZAi"/>
-                        <outlet property="tempLabel" destination="Ldx-r5-GUX" id="RXS-Ny-plr"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -72,9 +25,6 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
