@@ -9,6 +9,34 @@ import UIKit
 import CoreLocation
 
 class MainWeatherViewController: UIViewController {
+    
+    var cityNameLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 30)
+        label.textAlignment = .center
+        label.text = "Name of city"
+        return label
+    }()
+    
+    var discriptionLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textAlignment = .center
+        label.text = "weather disciption"
+        return label
+    }()
+    
+    var tempLabel: UILabel = {
+        var label = UILabel()
+        //label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 60)
+        label.textAlignment = .center
+        label.text = "Temp"
+        return label
+    }()
+    
 
     var weatherTableView: UITableView = {
         var table = UITableView()
@@ -50,7 +78,7 @@ extension MainWeatherViewController: UITableViewDataSource, UITableViewDelegate 
         return 1
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 100
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
@@ -61,7 +89,6 @@ extension MainWeatherViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = weatherTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainTableViewCell
         cell.subtitleLabel.text = "ВОСХОД СОЛНЦА"
-        cell.subtitleLabel.adjustsFontSizeToFitWidth = true
         cell.mainLabel.text = "8:45 AM"
         return cell
     }
@@ -151,15 +178,15 @@ extension MainWeatherViewController {
 //MARK: - Setting UI information
 extension MainWeatherViewController {
     func showCityName(_ name: String) {
-        //self.cityNameLabel.text = name
+        self.cityNameLabel.text = name
         print(name)
     }
     func showDiscription(_ discription: String) {
-        //self.discriptionLabel.text = discription
+        self.discriptionLabel.text = discription
         print(discription)
     }
     func showCurrentTemp(_ temp: Double) {
-        //self.tempLabel.text = "\(temp)" + "°"
+        self.tempLabel.text = "\(Int(temp))" + "°"
         print(temp)
     }
 }
@@ -168,19 +195,33 @@ extension MainWeatherViewController {
 extension MainWeatherViewController {
     
     func addAllViews() {
+        view.addSubview(cityNameLabel)
+        view.addSubview(discriptionLabel)
         view.addSubview(weatherTableView)
         addHeaderfoeTable()
     }
     
     func addHeaderfoeTable() {
-        let header = UIView(frame: CGRect(x: 0, y: 0, width: weatherTableView.frame.width, height: 100))
+        let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: tempLabel.font.pointSize))
         header.backgroundColor = .yellow
+        
+        tempLabel.frame = header.bounds
+        header.addSubview(tempLabel)
+        
         weatherTableView.tableHeaderView = header
     }
     
     func addAllConstraints() {
+        cityNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive = true
+        cityNameLabel.heightAnchor.constraint(equalToConstant: cityNameLabel.font.pointSize).isActive = true
+        cityNameLabel.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
+        
+        discriptionLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 8).isActive = true
+        discriptionLabel.heightAnchor.constraint(equalToConstant: discriptionLabel.font.pointSize).isActive = true
+        discriptionLabel.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
+        
         weatherTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        weatherTableView.heightAnchor.constraint(equalToConstant: view.bounds.height * 0.85).isActive = true
+        weatherTableView.topAnchor.constraint(equalTo: discriptionLabel.bottomAnchor, constant: 8).isActive = true
         weatherTableView.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
 
     }
