@@ -59,8 +59,10 @@ extension MainWeatherViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = weatherTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        //cell.textLabel?.text = "Cell"
+        let cell = weatherTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainTableViewCell
+        cell.subtitleLabel.text = "ВОСХОД СОЛНЦА"
+        cell.subtitleLabel.adjustsFontSizeToFitWidth = true
+        cell.mainLabel.text = "8:45 AM"
         return cell
     }
     
