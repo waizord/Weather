@@ -39,7 +39,8 @@ class MainWeatherViewController: UIViewController {
 
     var weatherTableView: UITableView = {
         var table = UITableView()
-        table.register(UINib(nibName: "MainTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
+        table.register(MainTableViewCell.nib(), forCellReuseIdentifier: MainTableViewCell.identifier)
+        table.register(DailyTableViewCell.nib(), forCellReuseIdentifier: DailyTableViewCell.identifier)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -57,6 +58,8 @@ class MainWeatherViewController: UIViewController {
         
         weatherTableView.dataSource = self
         weatherTableView.delegate = self
+        weatherTableView.estimatedRowHeight = 100
+        weatherTableView.rowHeight = UITableView.automaticDimension
         
         getLocationCoordinates()
         
@@ -89,17 +92,26 @@ extension MainWeatherViewController: UITableViewDataSource, UITableViewDelegate 
         return view
     }
     
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 100
+//    }
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = weatherTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MainTableViewCell
+        let cell = weatherTableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as! MainTableViewCell
+        
+        let dailyCell = weatherTableView.dequeueReusableCell(withIdentifier: DailyTableViewCell.identifier, for: indexPath) as! DailyTableViewCell
         
         switch indexPath.row {
         case 0:
-            cell.subtitleLabel.text = "SUNRISE"
-            cell.mainLabel.text = "\(self.weatherData.current.sunrise)"
-            return cell
+            dailyCell.collectionView.backgroundColor = .brown
+            dailyCell.cinfigure(to: weatherData)
+            return dailyCell
         case 1:
-            cell.subtitleLabel.text = "SUNRISE"
-            cell.mainLabel.text = "\(self.weatherData.current.sunrise)"
+            cell.subtitleLabel.isHidden = true
+            cell.mainLabel.text = "The discription of weather"
             return cell
         case 2:
             cell.subtitleLabel.text = "SUNRISE"
@@ -149,7 +161,6 @@ extension MainWeatherViewController: UITableViewDataSource, UITableViewDelegate 
             return cell
         }
     }
-    
 }
 //MARK: - Setting location and Network request
 extension MainWeatherViewController: CLLocationManagerDelegate {

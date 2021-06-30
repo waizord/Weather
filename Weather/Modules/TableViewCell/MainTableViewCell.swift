@@ -8,6 +8,12 @@
 import UIKit
 
 class MainTableViewCell: UITableViewCell {
+    
+    static let identifier = "MainTableViewCell"
+    static func nib() -> UINib {
+        return UINib(nibName: "MainTableViewCell", bundle: nil)
+    }
+    
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var mainLabel: UILabel!
     
