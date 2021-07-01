@@ -18,6 +18,8 @@ class DailyTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    let cellHight:CGFloat = 30
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.register(DailyCollectionViewCell.nib(), forCellWithReuseIdentifier: DailyCollectionViewCell.identifier)
@@ -34,15 +36,22 @@ class DailyTableViewCell: UITableViewCell {
     
     func cinfigure(to weatherData: WeatherData) {
         self.weatherData = weatherData
-        intrinsicContentSize
+        
+        let collectionHight: CGFloat = cellHight * CGFloat(weatherData.daily.count)
+        contentView.heightAnchor.constraint(equalToConstant: collectionHight).isActive = true
         collectionView.reloadData()
     }
 }
 extension DailyTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: contentView.frame.width, height: 30)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: contentView.frame.width, height: cellHight)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return weatherData?.daily.count ?? 0
     }

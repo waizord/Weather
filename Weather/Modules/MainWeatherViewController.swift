@@ -92,13 +92,6 @@ extension MainWeatherViewController: UITableViewDataSource, UITableViewDelegate 
         return view
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 100
-//    }
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = weatherTableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as! MainTableViewCell
         
@@ -106,7 +99,6 @@ extension MainWeatherViewController: UITableViewDataSource, UITableViewDelegate 
         
         switch indexPath.row {
         case 0:
-            dailyCell.collectionView.backgroundColor = .brown
             dailyCell.cinfigure(to: weatherData)
             return dailyCell
         case 1:
@@ -278,7 +270,7 @@ extension MainWeatherViewController {
     
     func addHeaderfoeTable() {
         let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: tempLabel.font.pointSize))
-        header.backgroundColor = .yellow
+        //header.backgroundColor = .yellow
         
         tempLabel.frame = header.bounds
         header.addSubview(tempLabel)
