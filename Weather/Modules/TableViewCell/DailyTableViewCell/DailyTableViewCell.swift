@@ -39,6 +39,7 @@ class DailyTableViewCell: UITableViewCell {
         
         let collectionHight: CGFloat = cellHight * CGFloat(weatherData.daily.count)
         contentView.heightAnchor.constraint(equalToConstant: collectionHight).isActive = true
+        
         collectionView.reloadData()
     }
 }
@@ -58,7 +59,14 @@ extension DailyTableViewCell: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DailyCollectionViewCell.identifier, for: indexPath) as! DailyCollectionViewCell
-        cell.nameDay.text = "NameDay"
+        if let day = weatherData?.daily[indexPath.row] {
+            cell.nameDay.text = "\(day.dt)"
+            cell.imageView.image = UIImage(named: day.weather[0].icon)
+            cell.maxTemp.text = "\(Int(day.temp.max))"
+            cell.minTemp.text = "\(Int(day.temp.min))"
+        }
+        
+        
         return cell
     }
     
