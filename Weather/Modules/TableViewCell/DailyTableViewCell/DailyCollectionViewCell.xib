@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nameDay" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XD7-pv-ZIk">
-                        <rect key="frame" x="25" y="0.0" width="150" height="30"/>
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="150" id="xk6-LI-5Mi"/>
                         </constraints>
@@ -26,14 +26,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q5u-zk-FvE">
-                        <rect key="frame" x="175" y="0.0" width="30" height="30"/>
+                        <rect key="frame" x="150" y="0.0" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="V4d-YA-4Jc"/>
                             <constraint firstAttribute="height" constant="30" id="eqz-yc-gU8"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="max" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FS1-Bc-qho">
-                        <rect key="frame" x="303" y="0.0" width="30" height="30"/>
+                        <rect key="frame" x="328" y="0.0" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="MXx-CA-r1A"/>
                         </constraints>
@@ -42,7 +42,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="min" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNs-Rf-J5S">
-                        <rect key="frame" x="333" y="0.0" width="30" height="30"/>
+                        <rect key="frame" x="358" y="0.0" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="6Fs-Le-xre"/>
                         </constraints>
@@ -56,8 +56,8 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="XD7-pv-ZIk" secondAttribute="bottom" id="7xb-Hg-BpK"/>
                 <constraint firstAttribute="bottom" secondItem="WNs-Rf-J5S" secondAttribute="bottom" id="9AI-Dk-JpX"/>
-                <constraint firstItem="XD7-pv-ZIk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="25" id="L6f-Mc-8o9"/>
-                <constraint firstAttribute="trailing" secondItem="WNs-Rf-J5S" secondAttribute="trailing" constant="25" id="NLD-O7-oAv"/>
+                <constraint firstItem="XD7-pv-ZIk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="L6f-Mc-8o9"/>
+                <constraint firstAttribute="trailing" secondItem="WNs-Rf-J5S" secondAttribute="trailing" id="NLD-O7-oAv"/>
                 <constraint firstAttribute="bottom" secondItem="FS1-Bc-qho" secondAttribute="bottom" id="Z77-Tw-EqY"/>
                 <constraint firstItem="FS1-Bc-qho" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Z7X-1t-c0h"/>
                 <constraint firstItem="q5u-zk-FvE" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="fKs-KX-14l"/>

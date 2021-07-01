@@ -42,7 +42,18 @@ class MainWeatherViewController: UIViewController {
         table.register(MainTableViewCell.nib(), forCellReuseIdentifier: MainTableViewCell.identifier)
         table.register(DailyTableViewCell.nib(), forCellReuseIdentifier: DailyTableViewCell.identifier)
         table.translatesAutoresizingMaskIntoConstraints = false
+        table.showsVerticalScrollIndicator = false
         return table
+    }()
+    
+    let hourlyCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.register(HourlyCollectionViewCell.nib(), forCellWithReuseIdentifier: HourlyCollectionViewCell.identifier)
+        view.backgroundColor = .white
+        view.showsHorizontalScrollIndicator = false
+        return view
     }()
     
     let locationManager = CLLocationManager()
@@ -58,14 +69,14 @@ class MainWeatherViewController: UIViewController {
         
         weatherTableView.dataSource = self
         weatherTableView.delegate = self
-        weatherTableView.estimatedRowHeight = 100
-        weatherTableView.rowHeight = UITableView.automaticDimension
+        
+        hourlyCollectionView.delegate = self
+        hourlyCollectionView.dataSource = self
         
         getLocationCoordinates()
         
         addAllViews()
         addAllConstraints()
-        
     }
 }
 
@@ -86,10 +97,10 @@ extension MainWeatherViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 100
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = .green
-        return view
+        //let view = UIView()
+        return hourlyCollectionView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -154,6 +165,26 @@ extension MainWeatherViewController: UITableViewDataSource, UITableViewDelegate 
         }
     }
 }
+
+//MARK: - HourlyCollectionView delegate and dataSorce
+extension MainWeatherViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 50, height: collectionView.frame.height)
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return weatherData.hourly.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: HourlyCollectionViewCell.identifier, for: indexPath) as! HourlyCollectionViewCell
+        
+        cell.configure(to: weatherData.hourly[indexPath.row])
+        return cell
+    }
+    
+}
+
 //MARK: - Setting location and Network request
 extension MainWeatherViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -226,6 +257,7 @@ extension MainWeatherViewController {
                 self.showDiscription(self.weatherData.daily[0].weather[0].description)
                 self.showCurrentTemp(self.weatherData.daily[0].temp.day)
                 self.weatherTableView.reloadData()
+                self.hourlyCollectionView.reloadData()
             }
         }
     }
@@ -270,9 +302,8 @@ extension MainWeatherViewController {
     
     func addHeaderfoeTable() {
         let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: tempLabel.font.pointSize))
-        //header.backgroundColor = .yellow
         
-        tempLabel.frame = header.bounds
+        tempLabel.frame = CGRect(x: -25, y: 0, width: header.bounds.width, height: header.bounds.height)
         header.addSubview(tempLabel)
         
         weatherTableView.tableHeaderView = header
@@ -289,8 +320,8 @@ extension MainWeatherViewController {
         
         weatherTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         weatherTableView.topAnchor.constraint(equalTo: discriptionLabel.bottomAnchor, constant: 8).isActive = true
-        weatherTableView.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
-
+        weatherTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        weatherTableView.widthAnchor.constraint(equalToConstant: view.frame.width - 50).isActive = true
     }
     
 }

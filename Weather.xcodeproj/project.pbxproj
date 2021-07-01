@@ -15,6 +15,8 @@
 		2C4B855C268ADE0500D29C7C /* DailyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4B855A268ADE0500D29C7C /* DailyCollectionViewCell.swift */; };
 		2C4B855D268ADE0500D29C7C /* DailyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4B855B268ADE0500D29C7C /* DailyCollectionViewCell.xib */; };
 		2C4C453D267C55D400DC8084 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4C453C267C55D400DC8084 /* NetworkService.swift */; };
+		2C4E4A92268DEA0500A161B4 /* HourlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4E4A90268DEA0400A161B4 /* HourlyCollectionViewCell.swift */; };
+		2C4E4A93268DEA0500A161B4 /* HourlyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4E4A91268DEA0400A161B4 /* HourlyCollectionViewCell.xib */; };
 		2C53FBAF267A7A470024ACB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53FBAE267A7A470024ACB2 /* AppDelegate.swift */; };
 		2C53FBB1267A7A470024ACB2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53FBB0267A7A470024ACB2 /* SceneDelegate.swift */; };
 		2C53FBB3267A7A470024ACB2 /* MainWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C53FBB2267A7A470024ACB2 /* MainWeatherViewController.swift */; };
@@ -34,6 +36,8 @@
 		2C4B855A268ADE0500D29C7C /* DailyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C4B855B268ADE0500D29C7C /* DailyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyCollectionViewCell.xib; sourceTree = "<group>"; };
 		2C4C453C267C55D400DC8084 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		2C4E4A90268DEA0400A161B4 /* HourlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCollectionViewCell.swift; sourceTree = "<group>"; };
+		2C4E4A91268DEA0400A161B4 /* HourlyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HourlyCollectionViewCell.xib; sourceTree = "<group>"; };
 		2C53FBAB267A7A470024ACB2 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C53FBAE267A7A470024ACB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C53FBB0267A7A470024ACB2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +94,7 @@
 			children = (
 				2C53FBB2267A7A470024ACB2 /* MainWeatherViewController.swift */,
 				2C2474B1268174620036FC76 /* TableViewCell */,
+				2C4E4A95268DEA1D00A161B4 /* HuorlyCollectionViewCell */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -101,6 +106,15 @@
 				2C53FBB0267A7A470024ACB2 /* SceneDelegate.swift */,
 			);
 			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		2C4E4A95268DEA1D00A161B4 /* HuorlyCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2C4E4A90268DEA0400A161B4 /* HourlyCollectionViewCell.swift */,
+				2C4E4A91268DEA0400A161B4 /* HourlyCollectionViewCell.xib */,
+			);
+			path = HuorlyCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		2C53FBA2267A7A470024ACB2 = {
@@ -205,6 +219,7 @@
 				2C4B8557268ACF0E00D29C7C /* DailyTableViewCell.xib in Resources */,
 				2C4B855D268ADE0500D29C7C /* DailyCollectionViewCell.xib in Resources */,
 				2C2474B5268174990036FC76 /* MainTableViewCell.xib in Resources */,
+				2C4E4A93268DEA0500A161B4 /* HourlyCollectionViewCell.xib in Resources */,
 				2C53FBB8267A7A4B0024ACB2 /* Assets.xcassets in Resources */,
 				2C53FBB6267A7A470024ACB2 /* Main.storyboard in Resources */,
 			);
@@ -226,6 +241,7 @@
 				2C4B855C268ADE0500D29C7C /* DailyCollectionViewCell.swift in Sources */,
 				2C2474B4268174990036FC76 /* MainTableViewCell.swift in Sources */,
 				2C53FBB1267A7A470024ACB2 /* SceneDelegate.swift in Sources */,
+				2C4E4A92268DEA0500A161B4 /* HourlyCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

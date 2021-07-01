@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SubTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="si3-F6-T1b">
-                        <rect key="frame" x="25" y="5" width="270" height="10"/>
+                        <rect key="frame" x="0.0" y="5" width="320" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="hIN-Zz-rYM"/>
                         </constraints>
@@ -26,7 +26,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MainLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sRk-iy-MY4">
-                        <rect key="frame" x="25" y="15" width="270" height="40"/>
+                        <rect key="frame" x="0.0" y="15" width="320" height="40"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -34,12 +34,12 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="si3-F6-T1b" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="72N-e2-Ucb"/>
-                    <constraint firstItem="si3-F6-T1b" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="9Qn-fR-IR6"/>
+                    <constraint firstItem="si3-F6-T1b" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="9Qn-fR-IR6"/>
                     <constraint firstItem="sRk-iy-MY4" firstAttribute="top" secondItem="si3-F6-T1b" secondAttribute="bottom" id="T3C-tT-9AR"/>
                     <constraint firstAttribute="bottom" secondItem="sRk-iy-MY4" secondAttribute="bottom" constant="5" id="m3q-tJ-2yB"/>
-                    <constraint firstAttribute="trailing" secondItem="si3-F6-T1b" secondAttribute="trailing" constant="25" id="sks-wO-omN"/>
-                    <constraint firstAttribute="trailing" secondItem="sRk-iy-MY4" secondAttribute="trailing" constant="25" id="v82-rv-LJv"/>
-                    <constraint firstItem="sRk-iy-MY4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="yW8-SH-Yfv"/>
+                    <constraint firstAttribute="trailing" secondItem="si3-F6-T1b" secondAttribute="trailing" id="sks-wO-omN"/>
+                    <constraint firstAttribute="trailing" secondItem="sRk-iy-MY4" secondAttribute="trailing" id="v82-rv-LJv"/>
+                    <constraint firstItem="sRk-iy-MY4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="yW8-SH-Yfv"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
