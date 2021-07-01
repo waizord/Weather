@@ -60,15 +60,32 @@ extension DailyTableViewCell: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DailyCollectionViewCell.identifier, for: indexPath) as! DailyCollectionViewCell
         if let day = weatherData?.daily[indexPath.row] {
-            cell.nameDay.text = "\(day.dt)"
+            cell.nameDay.text = getWeekday(daily: day, by: weatherData?.timezone_offset)
             cell.imageView.image = UIImage(named: day.weather[0].icon)
             cell.maxTemp.text = "\(Int(day.temp.max))"
             cell.minTemp.text = "\(Int(day.temp.min))"
         }
-        
-        
         return cell
     }
-    
-    
+}
+//MARK: - Date formater
+extension DailyTableViewCell {
+    func getWeekday(daily: Daily, by timezoneOffset: Int?) -> String {
+        
+        let dateFormater = DateFormatter()
+        let date = Date(timeIntervalSince1970: daily.dt)
+        let timezone = TimeZone(secondsFromGMT: timezoneOffset!)
+        print(timezone!)
+        dateFormater.locale = Locale(identifier: "ru")
+        dateFormater.timeZone = timezone
+        dateFormater.dateFormat = "EEEE"
+        return dateFormater.string(from: date).wordUppercased
+    }
+}
+extension String {
+    var wordUppercased: String {
+        var aryOfWord = self.split(separator: " ")
+        aryOfWord =  aryOfWord.map({String($0.first!).uppercased() + $0.dropFirst()})
+        return aryOfWord.joined(separator: " ")
+    }
 }
