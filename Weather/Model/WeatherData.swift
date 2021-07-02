@@ -80,6 +80,7 @@ struct Current: Codable {
     var wind_deg: Double = 0.0
     var wind_speed: Double = 0.0
     var temp: Double = 0.0
+    var visibility: Double = 0.0
 }
 
 struct WeatherData: Codable {

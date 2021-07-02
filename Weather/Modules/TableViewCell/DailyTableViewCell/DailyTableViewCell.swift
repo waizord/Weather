@@ -75,7 +75,6 @@ extension DailyTableViewCell {
         let dateFormater = DateFormatter()
         let date = Date(timeIntervalSince1970: daily.dt)
         let timezone = TimeZone(secondsFromGMT: timezoneOffset!)
-        print(timezone!)
         dateFormater.locale = Locale(identifier: "ru")
         dateFormater.timeZone = timezone
         dateFormater.dateFormat = "EEEE"

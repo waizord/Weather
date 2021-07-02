@@ -99,7 +99,6 @@ extension MainWeatherViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        //let view = UIView()
         return hourlyCollectionView
     }
     
@@ -114,50 +113,51 @@ extension MainWeatherViewController: UITableViewDataSource, UITableViewDelegate 
             return dailyCell
         case 1:
             cell.subtitleLabel.isHidden = true
-            cell.mainLabel.text = "The discription of weather"
+            cell.mainLabel.text = "\(weatherData.current.weather[0].description)"
             return cell
         case 2:
-            cell.subtitleLabel.text = "SUNRISE"
-            cell.mainLabel.text = "\(self.weatherData.current.sunrise)"
+            cell.subtitleLabel.text = "ВОСХОД СОЛНЦА"
+            
+            cell.mainLabel.text = "\(getTime(from: weatherData.current.sunrise, and: weatherData.timezone_offset))"
             return cell
         case 3:
-            cell.subtitleLabel.text = "SUNSET"
-            cell.mainLabel.text = "\(self.weatherData.current.sunset)"
+            cell.subtitleLabel.text = "ЗАХОД СОЛНЦА"
+            cell.mainLabel.text = "\(getTime(from: weatherData.current.sunset, and: weatherData.timezone_offset))"
             return cell
         case 4:
-            cell.subtitleLabel.text = "CHANCE OF RAIN"
+            cell.subtitleLabel.text = "ВЕРОЯТНОСТЬ ОСАДКОВ"
             cell.mainLabel.text = "\(Int(self.weatherData.daily[0].pop) * 100) %"
             return cell
         case 5:
-            cell.subtitleLabel.text = "HUMIDITY"
+            cell.subtitleLabel.text = "ВЛАЖНОСТЬ"
             cell.mainLabel.text = "\(self.weatherData.current.humidity) %"
             return cell
         case 6:
-            cell.subtitleLabel.text = "WIND"
-            cell.mainLabel.text = "\(self.weatherData.current.wind_speed) m/s"
+            cell.subtitleLabel.text = "ВЕТЕР"
+            cell.mainLabel.text = "\(self.weatherData.current.wind_speed) м/с"
             return cell
         case 7:
-            cell.subtitleLabel.text = "FEELS LIKE"
-            cell.mainLabel.text = "\(self.weatherData.current.feels_like)°"
+            cell.subtitleLabel.text = "ОЩУЩАЕТСЯ КАК"
+            cell.mainLabel.text = "\(Int(self.weatherData.current.feels_like))°"
             return cell
         case 8:
-            cell.subtitleLabel.text = "PRECIPITATION"
+            cell.subtitleLabel.text = "ОСАДКИ"
             if let rain = self.weatherData.daily[0].rain {
-                cell.mainLabel.text = "\(rain) cm"
+                cell.mainLabel.text = "\(rain) см"
             } else{
-                cell.mainLabel.text = "\(0) cm"
+                cell.mainLabel.text = "\(0) см"
             }
             return cell
         case 9:
-            cell.subtitleLabel.text = "PRESSURE"
-            cell.mainLabel.text = "\(self.weatherData.current.pressure) hPa"
+            cell.subtitleLabel.text = "ДАВЛЕНИЕ"
+            cell.mainLabel.text = "\(self.weatherData.current.pressure) мм рт.ст"
             return cell
         case 10:
-            cell.subtitleLabel.text = "VISIBILITY"
-            cell.mainLabel.text = "\(self.weatherData.current.dew_point) m"
+            cell.subtitleLabel.text = "ВИДИМОСТЬ"
+            cell.mainLabel.text = "\(self.weatherData.current.visibility) м"
             return cell
         case 11:
-            cell.subtitleLabel.text = "UV INDEX"
+            cell.subtitleLabel.text = "УФ ИНДЕКС"
             cell.mainLabel.text = "\(self.weatherData.current.uvi)"
             return cell
         default:
@@ -179,7 +179,7 @@ extension MainWeatherViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: HourlyCollectionViewCell.identifier, for: indexPath) as! HourlyCollectionViewCell
         
-        cell.configure(to: weatherData.hourly[indexPath.row])
+        cell.configure(from: weatherData, for: indexPath.row)
         return cell
     }
     
@@ -247,12 +247,6 @@ extension MainWeatherViewController {
             guard let self = self else {return}
             self.weatherData = weatherData
             
-            var date = Date(timeIntervalSince1970: weatherData.hourly[0].dt)
-            let dateFormater = DateFormatter()
-            dateFormater.timeZone = TimeZone(identifier: "ru")
-            
-            print(date)
-            
             DispatchQueue.main.async {
                 self.showDiscription(self.weatherData.daily[0].weather[0].description)
                 self.showCurrentTemp(self.weatherData.daily[0].temp.day)
@@ -262,15 +256,26 @@ extension MainWeatherViewController {
         }
     }
     func getNetworkRequestOfCityName() {
-        networkService.networkRequestforCityName(by: self.stringUrlCityName) { [weak self](curentData) in
+        networkService.networkRequestforCityName(by: self.stringUrlCityName) { [weak self](cityName) in
             guard let self = self else {return}
             
-            print(curentData)
-            
             DispatchQueue.main.async {
-                self.showCityName(curentData.name)
+                self.showCityName(cityName.name)
             }
         }
+    }
+}
+
+//MARK: - Get curent date and dateformat
+extension MainWeatherViewController {
+    func getTime(from timeinterval: Double, and timezoneOffset: Int) -> String {
+        let date = Date(timeIntervalSince1970: timeinterval)
+        let timeZone = TimeZone(secondsFromGMT: timezoneOffset)
+        let dateFormater = DateFormatter()
+        dateFormater.timeZone = timeZone
+        dateFormater.dateFormat = "h:mm a"
+        let time = dateFormater.string(from: date)
+        return time
     }
 }
 
@@ -323,5 +328,4 @@ extension MainWeatherViewController {
         weatherTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         weatherTableView.widthAnchor.constraint(equalToConstant: view.frame.width - 50).isActive = true
     }
-    
 }
