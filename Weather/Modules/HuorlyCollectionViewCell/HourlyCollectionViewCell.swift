@@ -26,7 +26,6 @@ class HourlyCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(from weatherData: WeatherData, fullTimeArray: [Hourly], for index: Int) {
-        //self.fullTimeArray = fullTimeArray
         
         let sunriseFirst = weatherData.daily[0].sunrise
         let sunriseSecond = weatherData.daily[1].sunrise
@@ -54,9 +53,6 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         if index == 0 {
             timeLabel.text = "сейчас"
         }
-//        }else {
-//            timeLabel.text = "\(getTime(from: weatherData.hourly[index].dt, and: weatherData.timezone_offset))"
-//        }
     }
     
     func getFullTimeArray(from hours: [Hourly], daily: [Daily]) {
