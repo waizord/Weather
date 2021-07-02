@@ -58,6 +58,7 @@ class MainWeatherViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     var weatherData = WeatherData()
+    var hourlyCell = HourlyCollectionViewCell()
     var stringUrl = ""
     var stringUrlCityName = ""
     
@@ -173,13 +174,13 @@ extension MainWeatherViewController: UICollectionViewDelegate, UICollectionViewD
         return CGSize(width: 50, height: collectionView.frame.height)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return weatherData.hourly.count
+        return hourlyCell.fullTimeArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = hourlyCollectionView.dequeueReusableCell(withReuseIdentifier: HourlyCollectionViewCell.identifier, for: indexPath) as! HourlyCollectionViewCell
         
-        cell.configure(from: weatherData, for: indexPath.row)
+        cell.configure(from: weatherData, fullTimeArray: hourlyCell.fullTimeArray, for: indexPath.row)
         return cell
     }
     
@@ -246,6 +247,8 @@ extension MainWeatherViewController {
         networkService.networkRequest(by: self.stringUrl) {[weak self](weatherData) in
             guard let self = self else {return}
             self.weatherData = weatherData
+            
+            self.hourlyCell.getFullTimeArray(from: weatherData.hourly, daily: weatherData.daily)
             
             DispatchQueue.main.async {
                 self.showDiscription(self.weatherData.daily[0].weather[0].description)
