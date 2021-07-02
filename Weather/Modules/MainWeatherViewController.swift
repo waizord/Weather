@@ -15,7 +15,7 @@ class MainWeatherViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 30)
         label.textAlignment = .center
-        label.text = "Name of city"
+        label.text = ". . ."
         return label
     }()
     
@@ -24,7 +24,7 @@ class MainWeatherViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .center
-        label.text = "weather disciption"
+        label.text = "-"
         return label
     }()
     
@@ -32,7 +32,7 @@ class MainWeatherViewController: UIViewController {
         var label = UILabel()
         label.font = UIFont.systemFont(ofSize: 60)
         label.textAlignment = .center
-        label.text = "Temp"
+        label.text = "- -"
         return label
     }()
     
